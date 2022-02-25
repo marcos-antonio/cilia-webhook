@@ -24,8 +24,11 @@ dotenv.config();
           url: connectionString,
           entities: [Budget],
           synchronize: true,
+          ssl: true,
           extra: {
-            ssl: true,
+            ssl: {
+              rejectUnauthorized: false,
+            },
           },
         };
       },
