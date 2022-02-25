@@ -21,14 +21,12 @@ dotenv.config();
         const [port, db] = portDb.split('/');
         return {
           type: 'postgres' as any,
-          host: ip,
-          port: port,
-          username: user,
-          password: pass,
-          database: db,
+          url: connectionString,
           entities: [Budget],
           synchronize: true,
-          ssl: true,
+          extra: {
+            ssl: true,
+          },
         };
       },
     }),
