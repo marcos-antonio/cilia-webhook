@@ -28,6 +28,7 @@ dotenv.config();
           database: db,
           entities: [Budget],
           synchronize: true,
+          ssl: true,
         };
       },
     }),
