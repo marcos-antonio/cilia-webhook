@@ -16,21 +16,17 @@ dotenv.config();
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const connectionString = configService.get('DATABASE_URL');
-        const [userPass, ipPortDb] = connectionString.slice(11).split('@');
-        const [user, pass] = userPass.split(':');
-        const [ip, portDb] = ipPortDb.split(':');
-        const [port, db] = portDb.split('/');
         return {
           type: 'postgres' as any,
           url: connectionString,
           entities: [Budget, Invoice],
           synchronize: true,
-          // ssl: true,
-          // extra: {
-          //   ssl: {
-          //     rejectUnauthorized: false,
-          //   },
-          // },
+          ssl: true,
+          extra: {
+            ssl: {
+              rejectUnauthorized: false,
+            },
+          },
         };
       },
     }),
