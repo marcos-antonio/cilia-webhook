@@ -3,6 +3,7 @@ import { ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BudgetService } from './modules/cilia/budget/budget.service';
 import { Budget } from './modules/cilia/budget/model/budget.entity';
 import { InvoiceService } from './modules/cilia/invoice/invoice.service';
+import { Invoice } from './modules/cilia/invoice/model/invoice.entity';
 import { AuthGuard } from './modules/common/guards/authGuard';
 
 @Controller()
@@ -34,7 +35,7 @@ export class AppController {
   async sendBudget(@Body() budget: Budget) {
     return this.budgetService.saveBudget(budget);
   }
-  @Post('sendBudget')
+  @Post('sendBudgetInvoice')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Invoice was successfully persisted',
@@ -45,7 +46,7 @@ export class AppController {
   })
   @ApiTags('Webhooks')
   @ApiOperation({
-    summary: 'Send Budget',
+    summary: 'Send Budget invoice',
     description: 'Receives a Invoice to persist',
   })
   @ApiHeader({
@@ -53,7 +54,7 @@ export class AppController {
     description: 'A fixed token used to authenticate the request.',
   })
   @UseGuards(AuthGuard)
-  async sendBudgetInvoice(@Body() budget: Budget) {
+  async sendBudgetInvoice(@Body() budget: Invoice) {
     return this.invoiceService.saveInvoice(budget);
   }
 }

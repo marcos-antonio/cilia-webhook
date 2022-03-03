@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
-export class Budget {
+export class BudgetDTO {
   @ApiPropertyOptional()
   claimNumber: string;
 

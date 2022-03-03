@@ -1,7 +1,8 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Budget } from '../dto/budget.dto';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BudgetDTO } from '../dto/budget.dto';
 
+@Entity()
 export class Invoice {
   @PrimaryGeneratedColumn()
   id: string;
@@ -51,6 +52,7 @@ export class Invoice {
   @ApiPropertyOptional()
   @Column({
     nullable: true,
+    type: 'float',
   })
   invoiceValue: number;
 
@@ -81,13 +83,14 @@ export class Invoice {
   @ApiPropertyOptional()
   @Column({
     nullable: true,
+    type: 'float',
   })
   issAliquot: number;
 
   @ApiPropertyOptional()
   @Column({
     nullable: true,
-    array: true,
+    type: 'jsonb',
   })
   invoiceFiles: string[];
 
@@ -96,5 +99,5 @@ export class Invoice {
     nullable: true,
     type: 'jsonb',
   })
-  budget: Budget;
+  budget: BudgetDTO;
 }

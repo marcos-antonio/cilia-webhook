@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Budget } from './modules/cilia/budget/model/budget.entity';
 import { CiliaModule } from './modules/cilia/cilia.module';
+import { Invoice } from './modules/cilia/invoice/model/invoice.entity';
 dotenv.config();
 
 @Module({
@@ -22,14 +23,14 @@ dotenv.config();
         return {
           type: 'postgres' as any,
           url: connectionString,
-          entities: [Budget],
+          entities: [Budget, Invoice],
           synchronize: true,
-          ssl: true,
-          extra: {
-            ssl: {
-              rejectUnauthorized: false,
-            },
-          },
+          // ssl: true,
+          // extra: {
+          //   ssl: {
+          //     rejectUnauthorized: false,
+          //   },
+          // },
         };
       },
     }),
